@@ -11,26 +11,26 @@ const btnReset = document.querySelector('.btn-reset')
 let interval
 
 /* 버튼 보이게 하는 함수 */
-function btnShow(btn){
+function btnShow(btn) {
     btn.style.display = 'inline-block';
 }
 
 /* 버튼 숨기게 하는 함수 */
-function btnBlind(btn){
+function btnBlind(btn) {
     btn.style.display = 'none';
 }
 
 /* input 입력시
 1.input 창 초기화
 2.start 버튼과 reset 버튼 활성화*/
-for(i of input){
-    i.addEventListener('input',()=>{
+for (i of input) {
+    i.addEventListener('input', () => {
         btnStart.disabled = false;
         btnStart.classList.add('on');
         btnReset.classList.add('on');
     })
-    i.addEventListener('click',(e)=>{
-        e.currentTarget.value='';
+    i.addEventListener('click', (e) => {
+        e.currentTarget.value = '';
     })
 }
 
@@ -38,7 +38,7 @@ for(i of input){
     1. 입력된 각 input 값 가져오기
     2. start 버튼 숨기고 pause 버튼 활성화 
     3. 입력된 input 값이 음수일 경우 실행 불가 */
-btnStart.addEventListener('click', ()=>{
+btnStart.addEventListener('click', () => {
     const hrs = parseInt(inpHrs.value);
     const min = parseInt(inpMin.value);
     const sec = parseInt(inpSec.value);
@@ -54,13 +54,13 @@ btnStart.addEventListener('click', ()=>{
 
 /* 타이머 시작하면 
 1.타이머 1초씩 감소하고 0일 때 정지
- 2.start 버튼 비활성화 */
+2.start 버튼 비활성화 */
 function startTimer(totalSec) {
     interval = setInterval(() => {
 
         if (totalSec <= 0) {
             interval = clearInterval(interval);
-            // alert('finish!');
+            alert('finish!');
             btnStart.disabled = true;
             btnStart.classList.remove('on');
             btnReset.classList.remove('on');
