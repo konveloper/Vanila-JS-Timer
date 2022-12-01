@@ -21,7 +21,7 @@ function btnBlind(btn){
 }
 
 /* input 입력시
- 1.input 창 초기화
+1.input 창 초기화
 2.start 버튼과 reset 버튼 활성화*/
 for(i of input){
     i.addEventListener('input',()=>{
@@ -50,4 +50,58 @@ btnStart.addEventListener('click', ()=>{
     startTimer(totalSec);
     btnBlind(btnStart);
     btnShow(btnPause);
+})
+
+/* 타이머 시작하면 
+1.타이머 1초씩 감소하고 0일 때 정지
+ 2.start 버튼 비활성화 */
+function startTimer(totalSec) {
+    interval = setInterval(() => {
+
+        if (totalSec <= 0) {
+            interval = clearInterval(interval);
+            // alert('finish!');
+            btnStart.disabled = true;
+            btnStart.classList.remove('on');
+            btnReset.classList.remove('on');
+            btnShow(btnStart);
+            btnBlind(btnPause);
+        }
+        totalSec--;
+        updateInputs(totalSec);
+    }, 1000)
+}
+
+/* 총 시간 시, 분, 초로 나누기 */
+function updateInputs(totalSec) {
+    const hrs = Math.floor(totalSec / 60 / 60);
+    const min = Math.floor(totalSec / 60);
+    const sec = totalSec % 60;
+
+    inpHrs.value = hrs;
+    inpMin.value = min;
+    inpSec.value = sec;
+
+    if(hrs<10){
+        inpHrs.value = '0' + hrs
+    }
+    if(min<10){
+        inpMin.value = '0' + min
+    }
+    if(sec<10){
+        inpSec.value = '0' + sec
+    }
+}
+
+/* reset 버튼 누르면 멈추고 초기화 */
+btnReset.addEventListener('click',()=>{
+    clearInterval(interval);
+    inpHrs.value = '00';
+    inpMin.value = '00';
+    inpSec.value = '00';
+    btnBlind(btnPause);
+    btnShow(btnStart);
+    btnStart.classList.remove('on');
+    btnReset.classList.remove('on');
+    btnStart.disabled = true;
 })
