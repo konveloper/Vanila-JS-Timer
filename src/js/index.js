@@ -82,19 +82,19 @@ function updateInputs(totalSec) {
     inpMin.value = min;
     inpSec.value = sec;
 
-    if(hrs<10){
+    if (hrs < 10) {
         inpHrs.value = '0' + hrs
     }
-    if(min<10){
+    if (min < 10) {
         inpMin.value = '0' + min
     }
-    if(sec<10){
+    if (sec < 10) {
         inpSec.value = '0' + sec
     }
 }
 
 /* reset 버튼 누르면 멈추고 초기화 */
-btnReset.addEventListener('click',()=>{
+btnReset.addEventListener('click', () => {
     clearInterval(interval);
     inpHrs.value = '00';
     inpMin.value = '00';
@@ -104,4 +104,11 @@ btnReset.addEventListener('click',()=>{
     btnStart.classList.remove('on');
     btnReset.classList.remove('on');
     btnStart.disabled = true;
+})
+
+/* pause 버튼 누르면 정지 되고 비활성화 */
+btnPause.addEventListener('click', () => {
+    clearInterval(interval);
+    btnShow(btnStart);
+    btnBlind(btnPause);
 })
